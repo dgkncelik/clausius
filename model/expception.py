@@ -1,0 +1,3 @@
+class ModelInitilzationError(Exception):
+    pass
+
