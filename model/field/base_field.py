@@ -1,2 +1,3 @@
 class BaseField(object):
-    pass
+    def __init__(self, key, value, validator=None):
+        pass
