@@ -1,6 +1,6 @@
-from .exception import ValidatorError
-
 class BaseValidator(object):
-    @staticmethod
-    def validate(value):
+    def __init__(self, **kwargs):
+        pass
+
+    def validate(self, **kwargs):
         return True
