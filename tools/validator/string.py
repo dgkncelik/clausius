@@ -4,6 +4,8 @@ from .exception import ValidatorError
 
 class StringValidator(BaseValidator):
     def __init__(self, **kwargs):
+        self.allow_whitespace = True
+        #TODO: move parameters on init
         super(StringValidator, self).__init__(**kwargs)
 
     def validate(self, value, allow_whitespace=True, max_length=None, min_length=None, **kwargs):
