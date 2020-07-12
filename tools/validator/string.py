@@ -1,24 +1,35 @@
 from .base_validator import BaseValidator
 from .exception import ValidatorError
 
+"""
+String validator class
+"""
+
 
 class StringValidator(BaseValidator):
     def __init__(self, **kwargs):
-        self.allow_whitespace = True
-        #TODO: move parameters on init
+        """
+        :param kwargs:
+        :param whitespace: if False emtpy string values will not be validated and raise exception.
+        default true
+        :param *_length: defines max or min length of string
+        """
+        self.whitespace = kwargs.get('whitespace', True)
+        self.max_length = kwargs.get('max_length', None)
+        self.min_length = kwargs.get('min_length', None)
         super(StringValidator, self).__init__(**kwargs)
 
-    def validate(self, value, allow_whitespace=True, max_length=None, min_length=None, **kwargs):
+    def validate(self, value, **kwargs):
         if not isinstance(value, str):
-            raise ValidatorError('Value is not instance of str')
+            raise ValidatorError('Value [%s] is not instance of str' % value)
         
-        if isinstance(min_length, int) and len(value) < min_length:
-            raise ValidatorError('Value length lower then minimum')
+        if isinstance(self.min_length, int) and len(value) < self.min_length:
+            raise ValidatorError('Value length [%s] lower then minimum' % len(value))
         
-        if isinstance(max_length, int) and len(value) > max_length:
-            raise ValidatorError('Value length higher then maximum') 
+        if isinstance(self.max_length, int) and len(value) > self.max_length:
+            raise ValidatorError('Value length [%s] higher then maximum' % len(value))
 
-        if not allow_whitespace and len(value.strip()) == 0:
+        if not self.whitespace and len(value.strip()) == 0:
             raise ValidatorError('Value is composed only with whitespace')
 
-        return super(StringValidator, self).validate(**kwargs)
+        return super(StringValidator, self).validate(value, **kwargs)
