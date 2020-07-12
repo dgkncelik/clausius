@@ -18,8 +18,8 @@ class DictionaryValidator(BaseValidator):
         super(DictionaryValidator, self).__init__(**kwargs)
 
     def validate(self, value, **kwargs):
-        if not isinstance(value, list):
-            raise ValidatorError('Value is not instance of list')
+        if not isinstance(value, dict):
+            raise ValidatorError('Value is not instance of dictionary')
 
         if isinstance(self.min_length, int) and len(value) < self.min_length:
             raise ValidatorError('Value length is [%s] lower then min_length [%s]' % (len(value), self.min_length))
