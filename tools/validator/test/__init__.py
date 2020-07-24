@@ -7,31 +7,30 @@ from tools.validator.test.test_float import TestFloatValidator
 from tools.validator.test.test_integer import TestIntegerValidator
 from tools.validator.test.test_string import TestStringValidator
 
-#TODO: implement test suite
 
-# def suite():
-#     suite = unittest.TestSuite()
-#     suite.addTest(TestBaseValidator('test_base_validator'))
-#     suite.addTest(TestBoolValidator('test_bool_validator'))
-#     return suite
-#
-#
-# if __name__ == '__main__':
-#     runner = unittest.TextTestRunner()
-#     runner.run(suite())
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(TestBaseValidator('test_validate'))
+    suite.addTest(TestBoolValidator('test_validate'))
+    suite.addTest(TestDictionaryValidator('test_min_length'))
+    suite.addTest(TestDictionaryValidator('test_max_length'))
+    suite.addTest(TestDictionaryValidator('test_validate'))
+    suite.addTest(TestListValidator('test_min_length'))
+    suite.addTest(TestListValidator('test_max_length'))
+    suite.addTest(TestListValidator('test_validate'))
+    suite.addTest(TestFloatValidator('test_min_value'))
+    suite.addTest(TestFloatValidator('test_min_value'))
+    suite.addTest(TestFloatValidator('test_validate'))
+    suite.addTest(TestIntegerValidator('test_min_value'))
+    suite.addTest(TestIntegerValidator('test_min_value'))
+    suite.addTest(TestIntegerValidator('test_validate'))
+    suite.addTest(TestStringValidator('test_min_length'))
+    suite.addTest(TestStringValidator('test_max_length'))
+    suite.addTest(TestStringValidator('test_whitespace'))
+    suite.addTest(TestStringValidator('test_validate'))
+    return suite
 
-# def suite():
-#     """
-#     :return: create and return TestSuit
-#     """
-#     test_suite = unittest.TestSuite()
-#     test_suite.addTest(TestBaseValidator())
-#     return test_suite
-#
-#
-# if __name__ == '__main__':
-#     mySuit = suite()
-#
-#     runner = unittest.TextTestRunner()
-#     runner.run(mySuit)
 
+if __name__ == '__main__':
+    runner = unittest.TextTestRunner()
+    runner.run(suite())
