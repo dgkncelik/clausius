@@ -45,7 +45,7 @@ class BaseField(object):
 
     def parse(self, pipeline=False):
         """
-        :param pipeline: if True data will parse in pipiline manner
+        :param pipeline: if True data will parse in pipeline manner
         :return: list of parsed results of value
         :raises: FieldParsingException on parsing error
         """
