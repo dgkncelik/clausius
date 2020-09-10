@@ -39,9 +39,11 @@ class BaseField(object):
         """
         for _validator in self._validators:
             try:
-                _validator.validate()
+                _validator.validate(self._value)
             except ValidatorError as ve:
                 raise FieldValidationException(ve)
+
+        return True
 
     def parse(self, pipeline=False):
         """
