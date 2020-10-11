@@ -12,7 +12,7 @@ class TestBaseField(unittest.TestCase):
         validator3 = BaseValidator()
         validators = [validator1, validator2, validator3]
 
-        field = BaseField()
+        field = BaseField(key='TEST')
         field.validators = validators
 
         self.assertEqual(field.validate(), True)
@@ -25,7 +25,7 @@ class TestBaseField(unittest.TestCase):
         validator6.validate = MagicMock()
         validators2 = [validator4, validator5, validator6]
 
-        field2 = BaseField()
+        field2 = BaseField(key='TEST')
         field2.validators = validators2
         field2.validate()
 
@@ -39,8 +39,7 @@ class TestBaseField(unittest.TestCase):
         parser3 = BaseParser()
         parsers = [parser1, parser2, parser3]
 
-        field = BaseField()
-        field.key = 'TEST_KEY'
+        field = BaseField(key='TEST_KEY')
         field.value = 'TEST_VALUE'
         field.parsers = parsers
 
@@ -54,9 +53,8 @@ class TestBaseField(unittest.TestCase):
         parser6.parse = MagicMock()
         parsers2 = [parser4, parser5, parser6]
 
-        field2 = BaseField()
+        field2 = BaseField(key='TEST')
         field2.parsers = parsers2
-        field2.key = 'TEST'
         field2.value = 'TEST'
         field2.parse()
 
@@ -69,7 +67,7 @@ class TestBaseField(unittest.TestCase):
         validator2 = BaseValidator()
         validator3 = BaseValidator()
 
-        field = BaseField()
+        field = BaseField(key='TEST')
         validators = [validator1, validator2, validator3]
         field._validators = validators
         self.assertEqual(field.validators, validators)
@@ -79,7 +77,7 @@ class TestBaseField(unittest.TestCase):
         validator2 = BaseValidator()
         validator3 = BaseValidator()
 
-        field = BaseField()
+        field = BaseField(key='TEST')
         validators = [validator1, validator2, validator3]
         field.validators = validators
         self.assertEqual(field._validators, validators)
@@ -89,7 +87,7 @@ class TestBaseField(unittest.TestCase):
         parser2 = BaseParser()
         parse3 = BaseParser()
 
-        field = BaseField()
+        field = BaseField(key='TEST')
         parsers = [parser1, parser2, parse3]
         field._parsers = parsers
         self.assertEqual(field.parsers, parsers)
@@ -99,29 +97,47 @@ class TestBaseField(unittest.TestCase):
         parser2 = BaseParser()
         parser3 = BaseParser()
 
-        field = BaseField()
+        field = BaseField(key='TEST')
         parsers = [parser1, parser2, parser3]
         field.parsers = parsers
         self.assertEqual(field._parsers, parsers)
 
     def test_set_key(self):
+        field = BaseField(key='TEST')
+        field.key = 'TEST_KEY'
+        self.assertEqual(field._key, 'TEST_KEY')
         # TODO: complete test
         pass
 
     def test_get_key(self):
-        pass
+        field = BaseField(key='TEST')
+        field.key = 'TEST_KEY'
+        self.assertEqual(field.key, 'TEST_KEY')
 
     def test_set_value(self):
-        pass
+        field = BaseField(key='TEST')
+        field.value = 'TEST_VALUE'
+        self.assertEqual(field._value, 'TEST_VALUE')
 
     def test_get_value(self):
-        pass
+        field = BaseField(key='TEST', value='TEST_VALUE')
+        self.assertEqual(field.value, 'TEST_VALUE')
 
     def test__validate_validators(self):
-        pass
+        validator1 = BaseValidator()
+        validator2 = BaseValidator()
+        validator3 = BaseValidator()
+        validators = [validator1, validator2, validator3]
+        field = BaseField(key='TEST', validators=validators)
+        self.assertEqual(field._validate_validators(validators), True)
 
     def test__validate_parsers(self):
-        pass
+        parser1 = BaseParser()
+        parser2 = BaseParser()
+        parse3 = BaseParser()
+        field = BaseField(key='TEST')
+        parsers = [parser1, parser2, parse3]
+        self.assertEqual(field._validate_parsers(parsers), True)
 
 
 if __name__ == '__main__':

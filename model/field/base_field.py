@@ -25,6 +25,9 @@ class BaseField(object):
         self._key = kwargs.get('key', None)
         self._value = kwargs.get('value', None)
 
+        if not isinstance(self._key, str):
+            raise FieldException('Key name must be instance of string')
+
         self._validators = kwargs.get('validators', [])
         self._validate_validators(self._validators)
 
@@ -146,6 +149,8 @@ class BaseField(object):
             if not isinstance(v, BaseValidator) or not issubclass(v.__class__, BaseValidator):
                 raise FieldException('Validators must be BaseValidator instance/subclass')
 
+        return True
+
     @staticmethod
     def _validate_parsers(p_list):
         """
@@ -159,3 +164,4 @@ class BaseField(object):
             if not isinstance(p, BaseParser) or not issubclass(p.__class__, BaseParser):
                 raise FieldException('Parsers must be BaseValidator instance/subclass')
 
+        return True
