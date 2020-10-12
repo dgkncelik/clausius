@@ -1,4 +1,4 @@
-from .expception import ModelInitilzationError
+from model.expception import ModelInitilzationError
 from clausius.storage import BaseStorage
 from clausius.messanger import BaseMessanger
 

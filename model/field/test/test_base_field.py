@@ -106,7 +106,6 @@ class TestBaseField(unittest.TestCase):
         field = BaseField(key='TEST')
         field.key = 'TEST_KEY'
         self.assertEqual(field._key, 'TEST_KEY')
-        # TODO: complete test
         pass
 
     def test_get_key(self):
